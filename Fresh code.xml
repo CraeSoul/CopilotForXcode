@@ -1,0 +1,116 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable id="p5J;VRxP~[e0LD7aQ|z}">stakee</variable>
+    <variable id="zC)#0Vw(f|6bWYKu,7!u">ftos</variable>
+    <variable id="rVEi@HLQr~5p%J;kETs1">Ticks</variable>
+    <variable id=":YR47L%_cD;96AmsPP5W">Chosen_Number</variable>
+    <variable id="zY2g9!l63Aq=,#h2Tv`f">f2f</variable>
+    <variable id="{YB7T==|nc3~Jpz-?.}">T1</variable>
+    <variable id="!LK5^8B8Dv~rC[{OTFHy">list_var</variable>
+    <variable id="L4Z3@$]=k?BNp,d:HWAj">s3s</variable>
+    <variable id="`.(_Qy*va~LbwC-;D+KE">upper_threshold</variable>
+    <variable id="fQ3f=^};C|~PI:+IkGZX">T2</variable>
+    <variable id="Xlh:;gFD)%VySO[blF(-">lower_threshold</variable>
+    <variable id="RKI0g9f6lF1WoA!8KjC[">pointto1</variable>
+    <variable id="I0oz!~GjMa!QuxE*riOP">T3</variable>
+    <variable id="l.KF/phUW,6O_d6-Erzj">pointto2</variable>
+    <variable id="b:)jy0vtlK0J}rn?a3Ax">step_1</variable>
+    <variable id="ZfmVgQrXw0?6:Y$FM1KV">step_2</variable>
+  </variables>
+  <!-- Main Trade Block -->
+  <block type="trade" id="xgH69|xFn9=70w.*3Vo@" x="0" y="0">
+    <field name="MARKET_LIST">synthetic_index</field>
+    <field name="SUBMARKET_LIST">random_index</field>
+    <field name="SYMBOL_LIST">1HZ50V</field>
+    <field name="TRADETYPECAT_LIST">digits</field>
+    <field name="TRADETYPE_LIST">matchesdiffers</field>
+    <field name="TYPE_LIST">DIGITDIFF</field>
+    <field name="CANDLEINTERVAL_LIST">60</field>
+    <field name="TIME_MACHINE_ENABLED">FALSE</field>
+    <field name="RESTARTONERROR">TRUE</field>
+    <statement name="INITIALIZATION">
+      <!-- Initialization of variables -->
+      <block type="variables_set" id="init1">
+        <field name="VAR">stakee</field>
+        <value name="VALUE">
+          <block type="text_prompt_ext">
+            <field name="TYPE">NUMBER</field>
+            <value name="TEXT"><shadow type="text">Stake amount</shadow></value>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="init2">
+            <field name="VAR">ftos</field>
+            <value name="VALUE"><block type="math_number"><field name="NUM">17</field></block></value>
+            <next>
+              <block type="variables_set" id="init3">
+                <field name="VAR">f2f</field>
+                <value name="VALUE"><block type="math_number"><field name="NUM">20</field></block></value>
+                <next>
+                  <block type="variables_set" id="init4">
+                    <field name="VAR">s3s</field>
+                    <value name="VALUE"><block type="math_number"><field name="NUM">120</field></block></value>
+                    <next>
+                      <block type="variables_set" id="init5">
+                        <field name="VAR">Chosen_Number</field>
+                        <value name="VALUE">
+                          <block type="text_prompt_ext">
+                            <field name="TYPE">NUMBER</field>
+                            <value name="TEXT"><shadow type="text">(Choose number from 2 to 7)</shadow></value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="variables_set" id="init6">
+                            <field name="VAR">Ticks</field>
+                            <value name="VALUE"><block type="math_number"><field name="NUM">1</field></block></value>
+                            <next>
+                              <block type="variables_set" id="init7">
+                                <field name="VAR">upper_threshold</field>
+                                <value name="VALUE"><block type="math_number"><field name="NUM">9</field></block></value>
+                                <next>
+                                  <block type="variables_set" id="init8">
+                                    <field name="VAR">lower_threshold</field>
+                                    <value name="VALUE"><block type="math_number"><field name="NUM">0</field></block></value>
+                                    <next>
+                                      <block type="variables_set" id="init9">
+                                        <field name="VAR">step_1</field>
+                                        <value name="VALUE"><block type="math_number"><field name="NUM">2</field></block></value>
+                                        <next>
+                                          <block type="variables_set" id="init10">
+                                            <field name="VAR">step_2</field>
+                                            <value name="VALUE"><block type="math_number"><field name="NUM">2</field></block></value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <!-- Trade Options -->
+    <statement name="SUBMARKET">
+      <block type="tradeOptions" id="opt1">
+        <field name="DURATIONTYPE_LIST">t</field>
+        <field name="CURRENCY_LIST">USD</field>
+        <field name="BARRIEROFFSETTYPE_LIST">+</field>
+        <field name="SECONDBARRIEROFFSETTYPE_LIST">-</field>
+        <value name="DURATION"><shadow type="math_number"><field name="NUM">1</field></shadow><block type="variables_get"><field name="VAR">Ticks</field></block></value>
+        <value name="AMOUNT"><shadow type="math_number"><field name="NUM">0.35</field></shadow><block type="variables_get"><field name="VAR">stakee</field></block></value>
+        <value name="PREDICTION"><shadow type="math_number"><field name="NUM">0</field></shadow><block type="variables_get"><field name="VAR">Chosen_Number</field></block></value>
+      </block>
+    </statement>
+  </block>
+  <!-- Additional after_purchase and before_purchase sections go here, similarly cleaned -->
+</xml>
